@@ -6,10 +6,29 @@
 </head>
 <body>
     <h1>To Do List</h1>
-    <ul>
+    <table border="1">
+      <tr>
+        <th>Title</th>
+        <th>Description</th>
+        <th>Completed</th>
+        <th>Actions</th>
+      </tr>
         {% for item in todos %}
-            <li>{{ item.title }}</li>
+            <tr>
+                <th>{{ item.title }}</th>
+                <th>{{ item.description }}</th>
+                <th>{{ item.status }}</th>
+                <th><a href="{% url 'todoapp:details' item.pk %}">Edit</a></th>
+            </tr>
         {% endfor %}
-    </ul>
+    </table><br><hr>
+    <h1>Add to the Todo List</h1><br>
+    <form action="." method="POST" id="frmAddTask">
+        {% csrf_token %}
+        Task Title: <input type="text" name="title" placeholder="Task to do"><br>
+        Details: <textarea form="frmAddTask" name="description" placeholder="Task to do" rows="6" cols="50">{{ todo.description }}</textarea><br>
+        Status: <input type="checkbox" name="status"><br>
+        <button type="submit">Submit this bitch</button>
+    </form>
 </body>
 </html>

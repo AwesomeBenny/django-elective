@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>To do App</title>
+</head>
+<body>
+    <h1>To Do List - Item Details</h1><br>
+    <form action="./{{pk}}" method="POST" id="frmDetails">
+        {% csrf_token %}
+        Task Title: <input type="text" name="title" placeholder="Task to do" size="50" value="{{todo.title}}"><br>
+        Details: <textarea form="frmDetails" name="description" placeholder="Task to do" rows="6" cols="50">{{ todo.description }}</textarea><br>
+        Status: <input type="checkbox" name="status" {% if todo.status %}checked{%endif%}><br>
+        <button type="submit">Submit Changes</button>
+    </form>
+</body>
+</html>
